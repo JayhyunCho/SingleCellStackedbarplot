@@ -6,6 +6,8 @@
 #’ @param seurat_obj A Seurat object
 #’ @param Celltype_var Unquoted name of the metadata column to use for fill (e.g. Celltype)
 #’ @param samples_var   Unquoted name of the metadata column to use on the x-axis (e.g. orig.ident)
+library(ggplot2)
+
 
 stacked_bar_proportion <- function(seurat_obj,
                                    Celltype_var,
@@ -32,7 +34,6 @@ stacked_bar_proportion <- function(seurat_obj,
   col_map <- setNames(as.character(gc$colour), gc$Ident)
   
   # 3) make the plot
-  library(ggplot2)
   p <- ggplot(df_counts, aes(x = !!samples_var, y = prop, fill = !!Celltype_var)) +
     geom_bar(stat = "identity",
              position = "fill",
